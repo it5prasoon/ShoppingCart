@@ -4,7 +4,7 @@ from django.urls import reverse
 
 # Design of Product
 class Category(models.Model):
-    title = models.CharField(max_length=300)
+    name = models.CharField(max_length=300)
     slug = models.SlugField(max_length=300)
     description = models.TextField(blank=True)
     image = models.ImageField(upload_to='category', blank=True)
@@ -19,13 +19,13 @@ class Category(models.Model):
         return reverse('store:products_by_category', args=[self.slug])
 
     def __str__(self):
-        return '{}'.format(self.title)
+        return '{}'.format(self.name)
 
 
 # Product Model
 class Product(models.Model):
-    image = models.ImageField(upload_to='hoodies/', blank=True)
-    title = models.CharField(max_length=300)
+    image = models.ImageField(upload_to='store/', blank=True)
+    name = models.CharField(max_length=300)
     slug = models.SlugField(max_length=250)
     description = models.TextField(blank=True)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
@@ -45,4 +45,4 @@ class Product(models.Model):
         return reverse('store:ProdCartDetail', args=[self.category.slug, self.slug])
 
     def __str__(self):
-        return '{}'.format(self.title)
+        return '{}'.format(self.name)
