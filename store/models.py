@@ -1,6 +1,16 @@
 from django.db import models
 from django.urls import reverse
 
+colour_choices = (('l', 'Blue'), ('g', 'Green'), ('b', 'Black'), ('r', 'Red'))
+size_choices = (
+    ('1', 'S'),
+    ('2', 'M'),
+    ('3', 'L'),
+    ('4', 'XL'),
+    ('5', 'XXL'),
+    ('6', 'XXXL')
+)
+
 
 # Design of Product
 class Category(models.Model):
@@ -31,6 +41,8 @@ class Product(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     price = models.FloatField()
     stock = models.IntegerField()
+    size = models.CharField(max_length=20, choices=size_choices, default='Blue')
+    color = models.CharField(max_length=20, choices=colour_choices, default='L')
     available = models.BooleanField(default=True)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
