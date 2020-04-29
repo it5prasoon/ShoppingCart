@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block metadescription %}
+    {% if category %}
+        {{ category.description| truncatewords:155 }}
+    {% else %}
+        Welcome To the store where you can select your institute hoodie.
+    {% endif %}
+{% endblock %}
+{% block title %}
+    {% if category %}
+        {{ category.name }} - Hoodie Store
+    {% else %}
+        See the product.
+    {% endif %}
+{% endblock %}
+{% block content %}
+    <!--Breadcrumb navigation-->
+    {% if category %}
+        <div>
+            <div>
+                <p><a href="{% url 'store:allProdcat' %}">Our Product</a> | {{ category.name }}</p>
+            </div>
+        </div>
+    {% endif %}
+
+    <div>
+        {% if category %}
+            <img src="{{ category.image.url }}" alt="{{ category.name }}">
+            </div>
+            <br>
+            <div>
+                <h1>{{ category.name }}</h1>
+                <p>{{ category.description }}</p>
+            </div>
+        {% else %}
+            <img src="{% static 'img/slide.jpg' %}" alt="Our Product">
+        {% endif %}
+    <div>
+        <div>
+            {% for product in products %}
+                <div>
+                    <div>
+                        <a href=""><img src="{{ product.img.url }}" alt="{{ product.name }}"></a>
+                        <div>
+                            <h4>{{ product.name }}</h4>
+                            <p>{{ product.price }}</p>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+</html>
