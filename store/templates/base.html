@@ -10,16 +10,25 @@
 <!--header-->
 <header>
     <center>
-        <a href="{% url 'store:allProdcat' %}"><img src="{% static 'img/logo.jpg' %}" alt="Hoodie For Sale"></a>
+        <img src="{% static 'img/logo.jpg' %}" alt="Hoodie For Sale"></a>
     </center>
 </header>
 <!-- nav bar-->
+<nav>
+    <ul>
+        <li><a href="{% url 'store:allProdcat' %}">Product</a></li>
+        {% for cat in links %}
+            <li><a href="{{ cat.get_url }}">{{ cat.name }}</a></li>
+        {% endfor %}
+        <li>Your Cart</li>
+    </ul>
+</nav>
 {% block content %}
 
 {% endblock %}
 <!-- Footer -->
 <div>
-    <p>All Rights Reserved.</p>
+    <p>Made by Prasoon..</p>
 </div>
 
 </body>
