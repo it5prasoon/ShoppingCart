@@ -14,8 +14,8 @@ size_choices = (
 
 # Design of Product
 class Category(models.Model):
-    name = models.CharField(max_length=300)
-    slug = models.SlugField(max_length=300)
+    name = models.CharField(max_length=300, unique= True)
+    slug = models.SlugField(max_length=300, unique= True)
     description = models.TextField(blank=True)
     image = models.ImageField(upload_to='category', blank=True)
 
@@ -34,15 +34,15 @@ class Category(models.Model):
 
 # Product Model
 class Product(models.Model):
-    image = models.ImageField(upload_to='store/', blank=True)
-    name = models.CharField(max_length=300)
-    slug = models.SlugField(max_length=250)
+    name = models.CharField(max_length=300, unique= True)
+    slug = models.SlugField(max_length=250, unique=True)
     description = models.TextField(blank=True)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     price = models.FloatField()
     stock = models.IntegerField()
     size = models.CharField(max_length=20, choices=size_choices, default='Blue')
     color = models.CharField(max_length=20, choices=colour_choices, default='L')
+    image = models.ImageField(upload_to='product', blank=True)
     available = models.BooleanField(default=True)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)

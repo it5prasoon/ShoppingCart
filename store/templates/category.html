@@ -1,8 +1,8 @@
 {% extends "base.html" %}
-{% load staticfiles %}
+{% load static %}
 {% block metadescription %}
     {% if category %}
-        {{ category.description| truncatewords:155 }}
+        {{ category.description| truncatewords:"155" }}
     {% else %}
         Welcome To the store where you can select your institute hoodie.
     {% endif %}
@@ -41,7 +41,7 @@
             {% for product in products %}
                 <div>
                     <div>
-                        <a href=""><img src="{{ product.img.url }}" alt="{{ product.name }}"></a>
+                        <a href=""><img src="{{ product.image.url }}" alt="{{ product.name }}"></a>
                         <div>
                             <h4>{{ product.name }}</h4>
                             <p>{{ product.price }}</p>
@@ -52,18 +52,3 @@
         </div>
     </div>
 {% endblock %}
-
-
-
-
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-
-</body>
-</html>
