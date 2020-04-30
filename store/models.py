@@ -1,21 +1,22 @@
 from django.db import models
 from django.urls import reverse
 
-colour_choices = (('l', 'Blue'), ('g', 'Green'), ('b', 'Black'), ('r', 'Red'))
+colour_choices = (('Blue', 'Blue'), ('Green', 'Green'), ('Black', 'Black'), ('Red', 'Red'))
 size_choices = (
-    ('1', 'S'),
-    ('2', 'M'),
-    ('3', 'L'),
-    ('4', 'XL'),
-    ('5', 'XXL'),
-    ('6', 'XXXL')
+    ('S', 'S'),
+    ('M', 'M'),
+    ('L', 'L'),
+    ('XL', 'XL'),
+    ('XXL', 'XXL'),
+    ('XXXL', 'XXXL')
 )
+
 
 
 # Design of Product
 class Category(models.Model):
-    name = models.CharField(max_length=300, unique= True)
-    slug = models.SlugField(max_length=300, unique= True)
+    name = models.CharField(max_length=300, unique=True)
+    slug = models.SlugField(max_length=300, unique=True)
     description = models.TextField(blank=True)
     image = models.ImageField(upload_to='category', blank=True)
 
@@ -34,14 +35,14 @@ class Category(models.Model):
 
 # Product Model
 class Product(models.Model):
-    name = models.CharField(max_length=300, unique= True)
+    name = models.CharField(max_length=300, unique=True)
     slug = models.SlugField(max_length=250, unique=True)
     description = models.TextField(blank=True)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     price = models.FloatField()
     stock = models.IntegerField()
-    size = models.CharField(max_length=20, choices=size_choices, default='Blue')
     color = models.CharField(max_length=20, choices=colour_choices, default='L')
+    size = models.CharField(max_length=20, choices=size_choices, default='3')
     image = models.ImageField(upload_to='product', blank=True)
     available = models.BooleanField(default=True)
     created = models.DateTimeField(auto_now_add=True)

@@ -8,29 +8,27 @@
 {% endblock %}
 
 {% block content %}
-    <div>
-        <div>
+    <div class="row my_prod_row_class">
+        <div class="mx-auto">
             <p><a href="{% url 'store:allProdcat' %}">Home</a>| <a
                     href="{{ product.category.get_url }}">{{ product.category }}</a>| {{ product.name }} </p>
         </div>
-    <div>
+    <div class="container">
         <br>
-        <div>
-            <div>
-                <div>
+        <div class="row">
+            <div class="col-12 col-sm-12 col-md-12 col-lg-6 text-center">
+                <div style="min-width:17rem;">
                     <img src="{{ product.image.url }}" alt="{{ product.name }}">
                 </div>
             </div>
-            <div>
+            <div class="col-12 col-sm-12 col-md-12 col-lg-6">
                 <div>
-                    <h1>{{ product.name }}</h1>
-                    <p>Rs{{ product.price }}</p>
-                    <p>Product Description</p>
+                    <h1 class="my_prod_title">{{ product.name }}</h1>
+                    <p>Rs {{ product.price }}</p>
+                    <p class="text-justify my_prod_text">Product Description</p>
                     <p>{{ product.description }}</p>
-                    <p>{{ product.size }}</p>
-                    <p>{{ product.color }}</p>
                     <br>
-                    <a href="#">Add To Cart</a>
+                    <a href="#" class="btn btn-info" role="button">Add To Cart</a>
                 </div>
             </div>
         </div>
