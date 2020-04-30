@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block metadescription %}
+    {{ product.description|truncatewords:155 }}
+{% endblock %}
+{% block title %}
+    {{ product.name }} - Hoodie Store
+{% endblock %}
+
+{% block content %}
+    <div>
+        <div>
+            <p><a href="{% url 'store:allProdcat' %}">Home</a>| <a
+                    href="{{ product.category.get_url }}">{{ product.category }}</a>| {{ product.name }} </p>
+        </div>
+    <div>
+        <br>
+        <div>
+            <div>
+                <div>
+                    <img src="{{ product.image.url }}" alt="{{ product.name }}">
+                </div>
+            </div>
+            <div>
+                <div>
+                    <h1>{{ product.name }}</h1>
+                    <p>Rs{{ product.price }}</p>
+                    <p>Product Description</p>
+                    <p>{{ product.description }}</p>
+                    <p>{{ product.size }}</p>
+                    <p>{{ product.color }}</p>
+                    <br>
+                    <a href="#">Add To Cart</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+{% endblock %}
