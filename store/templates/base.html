@@ -40,10 +40,11 @@
                     {% endfor %}
         </div>
          </li>
-
-      <li class="nav-item">
-        <a class="nav-link" href="#"><i class="fas fa-shopping-cart"></i></a>
+        {% if item_count > 0 %}
+          <li class="nav-item">
+        <a class="nav-link" href="{% url 'cart:cart_detail' %}"><i class="fas fa-shopping-cart"></i>({{item_count}})</a>
       </li>
+    {% endif %}
     </ul>
   </div>
 </nav>

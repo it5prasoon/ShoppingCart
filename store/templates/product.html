@@ -28,7 +28,7 @@
                     <p class="text-justify my_prod_text">Product Description</p>
                     <p>{{ product.description }}</p>
                     <br>
-                    <a href="#" class="btn btn-info" role="button">Add To <i class="fas fa-cart-plus"></i></a>
+                    <a href="{% url 'cart:add_cart' product.id %}" class="btn btn-info" role="button">Add To <i class="fas fa-cart-plus"></i></a>
                 </div>
             </div>
         </div>
