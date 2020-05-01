@@ -1,6 +1,5 @@
 from django.core.exceptions import ObjectDoesNotExist
 from django.shortcuts import redirect, render, get_object_or_404
-
 from store.models import Product
 from .models import Cart, CartItem
 
@@ -65,3 +64,4 @@ def RemoveAll(request, product_id):
     cart_item = CartItem.objects.get(product=product, cart=cart)
     cart_item.delete()
     return redirect('cart:cart_detail')
+
