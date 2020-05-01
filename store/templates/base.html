@@ -8,7 +8,8 @@
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'fonts/fontawesome-all.min.css' %}">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">#}
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
 
 
     <title>{% block title %} {% endblock %}</title>
@@ -44,7 +45,7 @@
                     </div>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'cart:cart_detail' %}">Cart({{ item_count }})</a>
+                    <a class="nav-link" href="{% url 'cart:cart_detail' %}"><i class="fa fa-shopping-cart"></i>({{ item_count }})</a>
                 </li>
             </ul>
         </div>
@@ -56,7 +57,7 @@
     {% endblock %}
     <!-- Footer -->
     <div class="my_footer">
-        <p class="my_footer p">Made by Prasoon..</p>
+        <p class="my_footer p">Made by Prasoon</p>
     </div>
 </div>
 <!-- Optional JavaScript -->
