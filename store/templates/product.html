@@ -26,17 +26,23 @@
                         <h1 class="my_prod_title">{{ product.name }}</h1>
                         <p>Rs {{ product.price }}</p>
                         <form method="GET">
-                            <select class="form-control">
+                        {% if product.variation_set.all %}
+                            {% if product.variation_set.sizes %}
 
-                                {% for item in product.variationcolor_set.all %}
-                                    <option value="{{ item.color|lower }}">{{ item.color|capfirst }}</option>
-                                {% endfor %}
-                            </select>
-                            <select class="form-control">
-                                {% for item in product.variationsize_set.all %}
-                                    <option value="{{ item.size|lower }}">{{ item.size|capfirst }}</option>
-                                {% endfor %}
-                            </select>
+                                <select class="form-control">
+                                    {% for item in product.variation_set.sizes %}
+                                        <option value="{{ item.title|lower }}">{{ item.title|capfirst }}</option>
+                                    {% endfor %}
+                                </select>
+                            {% endif %}
+                            {% if product.variation_set.colors %}
+                                <select class="form-control">
+                                    {% for item in product.variation_set.colors %}
+                                        <option value="{{ item.title|lower }}">{{ item.title|capfirst }}</option>
+                                    {% endfor %}
+                                </select>
+                                {% endif %}
+                        {% endif %}
                         </form>
                         <p class="text-justify my_prod_text">Product Description</p><br>
                         <p>{{ product.description }}</p>

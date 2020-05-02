@@ -60,22 +60,33 @@ class Product(models.Model):
         return '{}'.format(self.name)
 
 
-class VariationColor(models.Model):
-    product = models.ForeignKey(Product, on_delete=models.CASCADE)
-    color = models.CharField(max_length=120)
-    image = models.ForeignKey(Product, null=True, blank=True, on_delete=models.CASCADE, related_name='images')
-    price = models.DecimalField(decimal_places=2, max_digits=100, null=True, blank=True)
-    updated = models.DateTimeField(auto_now=True)
+class VariationManager(models.Manager):
+    def all(self):
+        return super(VariationManager, self).filter(active=True)
 
-    def __unicode__(self):
-        return self.color
+    def sizes(self):
+        return self.all().filter(category='size')
 
-class VariationSize(models.Model):
+    def colors(self):
+        return self.all().filter(category='color')
+
+
+VAR_CATEGORIES = {
+    ('size', 'size'),
+    ('color', 'color')
+}
+
+
+class Variation(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
-    size = models.CharField(max_length=120)
+    category = models.CharField(max_length=120, choices=VAR_CATEGORIES, default='size')
+    title = models.CharField(max_length=120)
     image = models.ForeignKey(Product, null=True, blank=True, on_delete=models.CASCADE, related_name='image1')
     price = models.DecimalField(decimal_places=2, max_digits=100, null=True, blank=True)
     updated = models.DateTimeField(auto_now=True)
+    active = models.BooleanField(default=True)
+
+    objects = VariationManager()
 
     def __unicode__(self):
-        return self.size
+        return self.title
