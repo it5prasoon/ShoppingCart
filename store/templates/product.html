@@ -13,25 +13,39 @@
             <p><a href="{% url 'store:allProdcat' %}">Home</a>| <a
                     href="{{ product.category.get_url }}">{{ product.category }}</a>| {{ product.name }} </p>
         </div>
-    <div class="container">
-        <br>
-        <div class="row">
-            <div class="col-12 col-sm-12 col-md-12 col-lg-6 text-center">
-                <div style="min-width:17rem;">
-                    <img class="my_prod_image" src="{{ product.image.url }}" alt="{{ product.name }}">
+        <div class="container">
+            <br>
+            <div class="row">
+                <div class="col-12 col-sm-12 col-md-12 col-lg-6 text-center">
+                    <div style="min-width:17rem;">
+                        <img class="my_prod_image" src="{{ product.image.url }}" alt="{{ product.name }}">
+                    </div>
                 </div>
-            </div>
-            <div class="col-12 col-sm-12 col-md-12 col-lg-6">
-                <div>
-                    <h1 class="my_prod_title">{{ product.name }}</h1>
-                    <p>Rs {{ product.price }}</p>
-                    <p class="text-justify my_prod_text">Product Description</p>
-                    <p>{{ product.description }}</p>
-                    <br>
-                    <a href="{% url 'cart:add_cart' product.id %}" class="btn btn-info" role="button">Add To <i class="fa fa-shopping-cart"></i></a>
+                <div class="col-12 col-sm-12 col-md-12 col-lg-6">
+                    <div>
+                        <h1 class="my_prod_title">{{ product.name }}</h1>
+                        <p>Rs {{ product.price }}</p>
+                        <form method="GET">
+                            <select class="form-control">
+
+                                {% for item in product.variationcolor_set.all %}
+                                    <option value="{{ item.color|lower }}">{{ item.color|capfirst }}</option>
+                                {% endfor %}
+                            </select>
+                            <select class="form-control">
+                                {% for item in product.variationsize_set.all %}
+                                    <option value="{{ item.size|lower }}">{{ item.size|capfirst }}</option>
+                                {% endfor %}
+                            </select>
+                        </form>
+                        <p class="text-justify my_prod_text">Product Description</p><br>
+                        <p>{{ product.description }}</p>
+                        <br>
+                        <a href="{% url 'cart:add_cart' product.id %}" class="btn btn-info" role="button">Add To <i
+                                class="fa fa-shopping-cart"></i></a>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
     </div>
 {% endblock %}

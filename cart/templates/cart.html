@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
+{% load crispy_forms_tags %}
 {% block metadescription %}
     This is the cart. Where you can store your purchase.
 {% endblock %}
@@ -51,28 +52,27 @@
                             <td class="text-left">
                                 {{ cart_item.product.name }}
                                 <br>
-
                                 <br>
                                 Unit Price: Rs {{ cart_item.product.price }}
                             </td>
-                            								{% if cart_item.quantity < cart_item.product.stock %}
-                            									<td>
-                            										<a href="{% url 'cart:add_cart' cart_item.product.id %}" class="custom_a">
-                                                                       <i class="fa fa-plus-circle custom_icon"></i></a>&nbsp;&nbsp;
-                                                                    <a href="{% url 'cart:RemoveOne' cart_item.product.id %}" class="custom_a">
-                                                                        <i class="fa fa-minus-circle custom_icon"></i></a>&nbsp;&nbsp;
-                                                                    <a href="{% url 'cart:RemoveAll' cart_item.product.id %}" class="custom_icon">
-                                                                        <i class="fa fa-recycle"></i></a>
-                            									</td>
-                            								{% else %}
-                            									<td>
-                            										&nbsp;<a href="{% url 'cart:RemoveOne' cart_item.product.id %}" class="custom_a">
-                                                                    <i class="fa fa-minus-circle custom_icon"></i></a>&nbsp;
-                                                                    <a href="{% url 'cart:RemoveAll' cart_item.product.id %}" class="custom_icon">
-                                                                        <i class="fa fa-recycle"></i></a>
-                            									</td>
-                            									<td></td>
-                            								{% endif %}
+                            {% if cart_item.quantity < cart_item.product.stock %}
+                                <td>
+                                    <a href="{% url 'cart:add_cart' cart_item.product.id %}" class="custom_a">
+                                        <i class="fa fa-plus-circle custom_icon"></i></a>&nbsp;&nbsp;
+                                    <a href="{% url 'cart:RemoveOne' cart_item.product.id %}" class="custom_a">
+                                        <i class="fa fa-minus-circle custom_icon"></i></a>&nbsp;&nbsp;
+                                    <a href="{% url 'cart:RemoveAll' cart_item.product.id %}" class="custom_icon">
+                                        <i class="fa fa-recycle"></i></a>
+                                </td>
+                            {% else %}
+                                <td>
+                                    &nbsp;<a href="{% url 'cart:RemoveOne' cart_item.product.id %}" class="custom_a">
+                                    <i class="fa fa-minus-circle custom_icon"></i></a>&nbsp;
+                                    <a href="{% url 'cart:RemoveAll' cart_item.product.id %}" class="custom_icon">
+                                        <i class="fa fa-recycle"></i></a>
+                                </td>
+                                <td></td>
+                            {% endif %}
                         </tr>
                     {% endfor %}
                     </tbody>
@@ -94,20 +94,20 @@
                         Check your Product details carefully before proceeding to checkout.
                     </td>
                 </tr>
-                						<tr>
-                							<td class="text-left">
-                								Total : <strong>Rs {{ total }}</strong>
-                							</td>
-                						</tr>
+                <tr>
+                    <td class="text-left">
+                        Total : <strong>Rs {{ total }}</strong>
+                    </td>
+                </tr>
                 </tbody>
             </table>
             <div class="mx-auto">
                 <a href="{% url 'store:allProdcat' %}" class="btn btn-secondary btn-block my_custom_button">Continue
                     Shopping</a>
             </div>
-         {% block form %}
+            {% block form %}
 
-         {% endblock %}
+            {% endblock %}
         </div>
 
 

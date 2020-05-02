@@ -12,7 +12,6 @@ size_choices = (
 )
 
 
-
 # Design of Product
 class Category(models.Model):
     name = models.CharField(max_length=300, unique=True)
@@ -59,3 +58,24 @@ class Product(models.Model):
 
     def __str__(self):
         return '{}'.format(self.name)
+
+
+class VariationColor(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    color = models.CharField(max_length=120)
+    image = models.ForeignKey(Product, null=True, blank=True, on_delete=models.CASCADE, related_name='images')
+    price = models.DecimalField(decimal_places=2, max_digits=100, null=True, blank=True)
+    updated = models.DateTimeField(auto_now=True)
+
+    def __unicode__(self):
+        return self.color
+
+class VariationSize(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    size = models.CharField(max_length=120)
+    image = models.ForeignKey(Product, null=True, blank=True, on_delete=models.CASCADE, related_name='image1')
+    price = models.DecimalField(decimal_places=2, max_digits=100, null=True, blank=True)
+    updated = models.DateTimeField(auto_now=True)
+
+    def __unicode__(self):
+        return self.size
