@@ -6,7 +6,8 @@ from django.contrib.auth.models import User
 class SignUpForm(UserCreationForm):
     first_name = forms.CharField(max_length=100, required=True)
     last_name = forms.CharField(max_length=100, required=True)
-    email = forms.EmailField(max_length=254, help_text='eg. youremail@anyemail.com')
+    registation_Number = forms.CharField(max_length=100, required=True)
+    email = forms.EmailField(max_length=254, help_text='eg. youremail@mail.com')
 
 
     class Meta:
