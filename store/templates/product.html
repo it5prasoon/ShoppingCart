@@ -25,18 +25,19 @@
                     <div>
                         <h1 class="my_prod_title">{{ product.name }}</h1>
                         <p>Rs {{ product.price }}</p>
-                        <form method="GET">
+                        <form method="POST">
+                        {% csrf_token %}
                         {% if product.variation_set.all %}
                             {% if product.variation_set.sizes %}
 
-                                <select class="form-control">
+                                <select class="form-control" name="size">
                                     {% for item in product.variation_set.sizes %}
                                         <option value="{{ item.title|lower }}">{{ item.title|capfirst }}</option>
                                     {% endfor %}
                                 </select>
                             {% endif %}
                             {% if product.variation_set.colors %}
-                                <select class="form-control">
+                                <select class="form-control" name="color">
                                     {% for item in product.variation_set.colors %}
                                         <option value="{{ item.title|lower }}">{{ item.title|capfirst }}</option>
                                     {% endfor %}

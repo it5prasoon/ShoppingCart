@@ -1,5 +1,7 @@
 from django.core.exceptions import ObjectDoesNotExist
+from django.http import HttpResponseRedirect
 from django.shortcuts import redirect, render, get_object_or_404
+from django.urls import reverse
 
 from store.models import Product
 from .models import Cart, CartItem
@@ -29,13 +31,15 @@ def add_cart(request, product_id):
         cart_item = CartItem.objects.create(
             product=product,
             quantity=1,
-            cart=cart
+            cart=cart,
         )
         cart_item.save()
     return redirect('cart:cart_detail')
 
 
 def cart_detail(request, total=0, counter=0, cart_items=None):
+    if request.method == "POST":
+        print(request.POST)
     try:
         cart = Cart.objects.get(cart_id=_cart_id(request))
         cart_items = CartItem.objects.filter(cart=cart, active=True)
@@ -65,4 +69,5 @@ def RemoveAll(request, product_id):
     cart_item = CartItem.objects.get(product=product, cart=cart)
     cart_item.delete()
     return redirect('cart:cart_detail')
+
 
